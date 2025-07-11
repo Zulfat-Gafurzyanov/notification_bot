@@ -22,6 +22,6 @@
 - Ежедневные сводки погоды в общую группу.
 
 ![group_message](./images/group_message.png)
-![private_message](./images/private.png)
+![private_message](./images/private_message.png)
 
 Использовалась библиотека: pyTelegramBotAPI 
