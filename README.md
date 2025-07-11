@@ -21,6 +21,6 @@
 - Общегрупповые анонсы будущих смен.
 - Ежедневные сводки погоды в общую группу.
 
-![group_message](./images/group_message.jpg)
+![group_message](./images/group_message.png)
 
 Использовалась библиотека: pyTelegramBotAPI 
