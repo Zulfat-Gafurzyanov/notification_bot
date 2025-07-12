@@ -69,6 +69,7 @@ def create_schedule(month_name):
     file = read_xlsx(month_name)
 
     if not file:
+        logging.error('График на текущий месяц не загружен')
         return {}
     else:
         # Создаем словарь вида:

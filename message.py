@@ -1,4 +1,5 @@
 import json
+import logging
 import os
 from datetime import datetime, timedelta
 
@@ -27,12 +28,15 @@ def create_gain_message(user_id) -> str:
 
     # Получаем Ф.И.О пользователя, который написал боту:
     user_name = DEPARTMENT.get(str(user_id))
-    user_gains = schedule[user_name]['смена']
-
-    # Создали словарь смен босов.
-    boss_gains = {}
-    for boss in BOSS_LIST:
-        boss_gains[boss] = schedule[boss]['смена']
+    user_gains = []
+    if schedule:
+        user_gains = schedule[user_name]['смена']
+        boss_gains = {}  # Создали словарь смен босов.
+        for boss in BOSS_LIST:
+            boss_gains[boss] = schedule[boss]['смена']
+    else:
+        message = f'График на {current_month} не загружен'
+        return message
 
     # Составляем сообщение:
     future_gains = False  # Флаг для определения будущих смен.
@@ -67,7 +71,12 @@ def create_duty_message(user_id) -> str:
 
     # Получаем Ф.И.О пользователя, который написал боту:
     user_name = DEPARTMENT.get(str(user_id))
-    user_duties = schedule[user_name]['дежурство']
+    user_duties = []
+    if schedule:
+        user_duties = schedule[user_name]['дежурство']
+    else:
+        message = f'График на {current_month} не загружен'
+        return message
 
     # Составляем сообщение:
     future_duties = False  # Флаг для определения будущих смен.
@@ -95,7 +104,11 @@ def create_vacation_message(user_id) -> str:
 
     # Получаем Ф.И.О пользователя, который написал боту:
     user_name = DEPARTMENT.get(str(user_id))
-    user_vacation = schedule[user_name]['отпуск']
+    if schedule:
+        user_vacation = schedule[user_name]['отпуск']
+    else:
+        message = f'График на {current_month} не загружен'
+        return message
 
     # Формируем сообщение:
     message = str()
